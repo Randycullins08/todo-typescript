@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+}
+
+.app {
+  display: grid;
+  place-items: center;
+}
+
+h1 {
+  margin-top: 5%;
+}
+
+.todo-form-container {
+  margin-top: 5%;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+.todo-wrapper {
+  display: flex;
+}
+
+li {
+  list-style: none;
+}
+
+.completed {
+  text-decoration: line-through;
+}

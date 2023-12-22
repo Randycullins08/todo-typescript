@@ -1,0 +1,29 @@
+import { MouseEvent } from "react";
+
+interface CheckboxProps {
+  completed: boolean;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+}
+
+export default function Checkmark({
+  completed,
+  onClick,
+  ...props
+}: CheckboxProps) {
+  return (
+    <button
+      className={`${completed ? "checked" : "unchecked"}`}
+      onClick={onClick}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        {...props}
+      >
+        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+      </svg>
+    </button>
+  );
+}

@@ -64,13 +64,9 @@ export const useTodoFunctions = () => {
     })
       .then((res) => {
         res.json();
-        if (res.ok) {
-          setTodos((prev) =>
-            prev.filter((todoItem) => todoItem.id !== todo.id)
-          );
-        }
+        setTodos((prev) => prev.filter((todoItem) => todoItem.id !== todo.id));
       })
-      .catch((err) => console.error("Error submitting todo: ", err));
+      .catch((err) => console.error("Error deleting todo: ", err));
   };
 
   return { todos, getTodos, addTodo, toggleTodo, deleteTodo };

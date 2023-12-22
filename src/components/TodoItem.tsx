@@ -1,19 +1,14 @@
-import TrashCanIcon from "./icons/TrashCanIcon";
-import { Todo } from "../interfaces/interfaces";
+import { TodoProps } from "../interfaces/interfaces";
+import { useTodoContext } from "./context/TodoContext";
 import Checkbox from "./icons/Checkbox";
 import Checkmark from "./icons/Checkmark";
-import { useTodoContext } from "./context/TodoContext";
-
-interface TodoProps {
-  todoData: Todo;
-  // handleDelete: (item: Todo) => Promise<void>;
-  // handleComplete: (item: Todo) => Promise<void>;
-}
+import TrashCanIcon from "./icons/TrashCanIcon";
 
 export default function TodoItem({ todoData }: TodoProps) {
   const { toggleTodo, deleteTodo } = useTodoContext();
+
   return (
-    <ul className={`todo-wrapper ${todoData.completed && "completed"}`}>
+    <li className={`todo-wrapper ${todoData.completed && "completed"}`}>
       {todoData.completed ? (
         <Checkmark
           completed={todoData.completed}
@@ -25,8 +20,9 @@ export default function TodoItem({ todoData }: TodoProps) {
           completed={todoData.completed}
         />
       )}
-      <li>{todoData.task}</li>
+
+      {todoData.task}
       <TrashCanIcon onClick={() => deleteTodo(todoData)} />
-    </ul>
+    </li>
   );
 }

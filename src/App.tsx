@@ -11,7 +11,12 @@ export default function App() {
 
       <TodoForm />
 
-      {todos && todos.map((todo) => <TodoItem key={todo.id} todoData={todo} />)}
+      {todos &&
+        todos.map((todo) => (
+          <ul key={todo.id}>
+            <TodoItem todoData={todo} />
+          </ul>
+        ))}
     </div>
   );
 }

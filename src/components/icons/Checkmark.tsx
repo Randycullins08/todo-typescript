@@ -1,15 +1,10 @@
-import { MouseEvent } from "react";
-
-interface CheckboxProps {
-  completed: boolean;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
-}
+import { ToggleProps } from "../../interfaces/interfaces";
 
 export default function Checkmark({
   completed,
   onClick,
   ...props
-}: CheckboxProps) {
+}: ToggleProps) {
   return (
     <button
       className={`${completed ? "checked" : "unchecked"}`}

@@ -1,16 +1,27 @@
-import { FormEvent } from "react";
+import { FormEvent, forwardRef, ForwardedRef } from "react";
 import { FormProps } from "../../interfaces/interfaces";
 
-export default function Form({ onSubmit, children, ...props }: FormProps) {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+const Form = forwardRef<HTMLFormElement, FormProps>(
+  (props, ref: ForwardedRef<HTMLFormElement>) => {
+    const { onSubmit, children, ...rest } = props;
 
-    onSubmit(event);
-  };
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
 
-  return (
-    <form className="todo-form-container" onSubmit={handleSubmit} {...props}>
-      {children}
-    </form>
-  );
-}
+      onSubmit(event);
+    };
+
+    return (
+      <form
+        ref={ref}
+        className="todo-form-container"
+        onSubmit={handleSubmit}
+        {...rest}
+      >
+        {children}
+      </form>
+    );
+  }
+);
+
+export default Form;

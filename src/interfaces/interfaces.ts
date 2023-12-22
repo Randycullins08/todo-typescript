@@ -1,9 +1,13 @@
-import { FormEvent, ReactNode } from "react";
+import { FormEvent, MouseEvent, ReactNode } from "react";
 
 export interface Todo {
   id: string;
   task: string;
   completed: boolean;
+}
+
+export interface TodoProps {
+  todoData: Todo;
 }
 
 export interface TodoContextProps {
@@ -16,4 +20,9 @@ export interface TodoContextProps {
 export interface FormProps {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   children: ReactNode;
+}
+
+export interface ToggleProps {
+  completed: boolean;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }

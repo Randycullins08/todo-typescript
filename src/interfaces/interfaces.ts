@@ -23,6 +23,5 @@ export interface FormProps {
 }
 
 export interface ToggleProps {
-  completed: boolean;
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }

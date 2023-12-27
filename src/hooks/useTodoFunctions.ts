@@ -27,12 +27,9 @@ export const useTodoFunctions = () => {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newTodo),
-    })
-      .then((res) => {
-        res.json();
-        setTodos((prev) => [...prev, newTodo]);
-      })
-      .catch((err) => console.error("Error submitting todo: ", err));
+    }).catch((err) => console.error("Error submitting todo: ", err));
+
+    setTodos((prev) => [...prev, newTodo]);
   };
 
   const toggleTodo = async (todo: Todo): Promise<void> => {
@@ -48,12 +45,9 @@ export const useTodoFunctions = () => {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(completedTodo[updateTodo]),
-    })
-      .then((res) => {
-        res.json();
-        setTodos(completedTodo);
-      })
-      .catch((err) => console.error("Error Completing Task: ", err));
+    }).catch((err) => console.error("Error Completing Task: ", err));
+
+    setTodos(completedTodo);
   };
 
   const deleteTodo = async (todo: Todo): Promise<void> => {
@@ -61,12 +55,9 @@ export const useTodoFunctions = () => {
       method: "DELETE",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(todo),
-    })
-      .then((res) => {
-        res.json();
-        setTodos((prev) => prev.filter((todoItem) => todoItem.id !== todo.id));
-      })
-      .catch((err) => console.error("Error deleting todo: ", err));
+    }).catch((err) => console.error("Error deleting todo: ", err));
+
+    setTodos((prev) => prev.filter((todoItem) => todoItem.id !== todo.id));
   };
 
   return { todos, getTodos, addTodo, toggleTodo, deleteTodo };

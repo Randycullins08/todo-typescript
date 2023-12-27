@@ -10,15 +10,9 @@ export default function TodoItem({ todoData }: TodoProps) {
   return (
     <li className={`todo-wrapper ${todoData.completed && "completed"}`}>
       {todoData.completed ? (
-        <Checkmark
-          completed={todoData.completed}
-          onClick={() => toggleTodo(todoData)}
-        />
+        <Checkmark onClick={() => toggleTodo(todoData)} />
       ) : (
-        <Checkbox
-          onClick={() => toggleTodo(todoData)}
-          completed={todoData.completed}
-        />
+        <Checkbox onClick={() => toggleTodo(todoData)} />
       )}
 
       {todoData.task}

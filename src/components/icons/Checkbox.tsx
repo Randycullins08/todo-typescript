@@ -1,4 +1,4 @@
-import { ToggleProps } from "../../interfaces/interfaces";
+import { ToggleProps } from "../../types/types";
 
 export default function Checkbox({ onClick, ...props }: ToggleProps) {
   return (

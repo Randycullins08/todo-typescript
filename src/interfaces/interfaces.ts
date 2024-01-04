@@ -21,7 +21,3 @@ export interface FormProps {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   children: ReactNode;
 }
-
-export interface ToggleProps {
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
-}

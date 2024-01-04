@@ -31,3 +31,8 @@ li {
 .completed {
   text-decoration: line-through;
 }
+
+.save-btn {
+  border: red;
+  background-color: aliceblue;
+}

@@ -1,3 +1,14 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": "00f7675e-a589-484b-8e4a-c227c973f2c4",
+      "task": "Do dishes",
+      "completed": false
+    },
+    {
+      "id": "893be7c3-5813-4870-992d-977baa2ca30b",
+      "task": "Mop floors",
+      "completed": false
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-import { FormEvent, MouseEvent, ReactNode } from "react";
+import { FormEvent, ReactNode } from "react";
 
 export interface Todo {
   id: string;

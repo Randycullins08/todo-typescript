@@ -1,4 +1,4 @@
-import { TodoProps } from "../interfaces/interfaces";
+import { TodoProps } from "../types/types";
 import { useTodoContext } from "./context/TodoContext";
 import Checkbox from "./icons/Checkbox";
 import Checkmark from "./icons/Checkmark";

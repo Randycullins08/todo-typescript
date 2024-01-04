@@ -6,10 +6,6 @@ export interface Todo {
   completed: boolean;
 }
 
-export interface TodoProps {
-  todoData: Todo;
-}
-
 export interface TodoContextProps {
   todos: Todo[];
   addTodo: (task: string) => Promise<void>;

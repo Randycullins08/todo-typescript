@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Todo } from "../interfaces/interfaces";
+import { Todo, UseTodoFunctions } from "../interfaces/interfaces";
 import { v4 } from "uuid";
 
-export const useTodoFunctions = () => {
+export const useTodoFunctions = (): UseTodoFunctions => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const getTodos = async (): Promise<void> => {
+  const getTodos = async () => {
     await fetch("http://localhost:3000/todos")
       .then((res) => res.json())
       .then((data) => {
@@ -14,7 +14,7 @@ export const useTodoFunctions = () => {
       .catch((err) => console.error("Error getting todos: ", err));
   };
 
-  const addTodo = async (task: string): Promise<void> => {
+  const addTodo = async (task: string) => {
     const newId = v4();
 
     const newTodo: Todo = {
@@ -32,7 +32,7 @@ export const useTodoFunctions = () => {
     setTodos((prev) => [...prev, newTodo]);
   };
 
-  const toggleTodo = async (todo: Todo): Promise<void> => {
+  const toggleTodo = async (todo: Todo) => {
     const completedTodo = todos.map((todoItem) =>
       todoItem.id === todo.id
         ? { ...todoItem, completed: !todoItem.completed }
@@ -50,7 +50,7 @@ export const useTodoFunctions = () => {
     setTodos(completedTodo);
   };
 
-  const deleteTodo = async (todo: Todo): Promise<void> => {
+  const deleteTodo = async (todo: Todo) => {
     await fetch(`http://localhost:3000/todos/${todo.id}`, {
       method: "DELETE",
       headers: { "content-type": "application/json" },

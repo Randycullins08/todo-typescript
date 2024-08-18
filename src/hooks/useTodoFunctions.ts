@@ -6,10 +6,10 @@ export const useTodoFunctions = (): UseTodoFunctions => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const getTodos = async () => {
-    await fetch("http://localhost:3000/todos")
+    await fetch("http://127.0.0.1:5000/todos")
       .then((res) => res.json())
-      .then((data) => {
-        setTodos(data);
+      .then(({ results }) => {
+        setTodos(results);
       })
       .catch((err) => console.error("Error getting todos: ", err));
   };
@@ -19,15 +19,20 @@ export const useTodoFunctions = (): UseTodoFunctions => {
 
     const newTodo: Todo = {
       id: newId,
-      task: task,
+      task,
       completed: false,
     };
 
-    await fetch("http://localhost:3000/todos", {
+    console.log(task);
+
+    await fetch("http://127.0.0.1:5000/todos", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newTodo),
-    }).catch((err) => console.error("Error submitting todo: ", err));
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("Add todo: ", data.results))
+      .catch((err) => console.error("Error submitting todo: ", err));
 
     setTodos((prev) => [...prev, newTodo]);
   };
@@ -41,20 +46,21 @@ export const useTodoFunctions = (): UseTodoFunctions => {
 
     const updateTodo = todos.indexOf(todo);
 
-    await fetch(`http://localhost:3000/todos/${todo.id}`, {
-      method: "PATCH",
+    await fetch(`http://127.0.0.1:5000/todo/${todo.id}`, {
+      method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(completedTodo[updateTodo]),
-    }).catch((err) => console.error("Error Completing Task: ", err));
+    })
+      .then((res) => res.json())
+      .catch((err) => console.error("Error Completing Task: ", err));
 
     setTodos(completedTodo);
   };
 
   const deleteTodo = async (todo: Todo) => {
-    await fetch(`http://localhost:3000/todos/${todo.id}`, {
+    console.log(todo);
+    await fetch(`http://127.0.0.1:5000/todo/${todo.id}`, {
       method: "DELETE",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(todo),
     }).catch((err) => console.error("Error deleting todo: ", err));
 
     setTodos((prev) => prev.filter((todoItem) => todoItem.id !== todo.id));

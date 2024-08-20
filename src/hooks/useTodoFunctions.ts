@@ -23,15 +23,14 @@ export const useTodoFunctions = (): UseTodoFunctions => {
       completed: false,
     };
 
-    console.log(task);
+    console.log(JSON.stringify(newTodo));
 
     await fetch("http://127.0.0.1:5000/todos", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTodo),
     })
       .then((res) => res.json())
-      .then((data) => console.log("Add todo: ", data.results))
       .catch((err) => console.error("Error submitting todo: ", err));
 
     setTodos((prev) => [...prev, newTodo]);

@@ -11,12 +11,13 @@ export default function App() {
 
       <TodoForm />
 
-      {todos &&
-        todos.map((todo) => (
-          <ul key={todo.id}>
-            <TodoItem todoData={todo} />
-          </ul>
-        ))}
+      {todos && (
+        <ul>
+          {todos.map((todo) => (
+            <TodoItem todoData={todo} key={todo.id} />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

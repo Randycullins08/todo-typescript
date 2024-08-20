@@ -23,8 +23,6 @@ export const useTodoFunctions = (): UseTodoFunctions => {
       completed: false,
     };
 
-    console.log(JSON.stringify(newTodo));
-
     await fetch("http://127.0.0.1:5000/todos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

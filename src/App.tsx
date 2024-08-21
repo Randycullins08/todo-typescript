@@ -14,7 +14,7 @@ export default function App() {
       {todos && (
         <ul>
           {todos.map((todo) => (
-            <TodoItem todoData={todo} key={todo.id} />
+            <TodoItem key={todo.todo_id} todoData={todo} />
           ))}
         </ul>
       )}

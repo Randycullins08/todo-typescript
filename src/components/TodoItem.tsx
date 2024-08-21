@@ -4,17 +4,11 @@ import Checkbox from "./icons/Checkbox";
 import Checkmark from "./icons/Checkmark";
 import TrashCanIcon from "./icons/TrashCanIcon";
 
-export default function TodoItem({
-  todoData,
-  key,
-}: TodoProps & { key: string }) {
+export default function TodoItem({ todoData }: TodoProps) {
   const { toggleTodo, deleteTodo } = useTodoContext();
 
   return (
-    <li
-      key={key}
-      className={`todo-wrapper ${todoData.completed && "completed"}`}
-    >
+    <li className={`todo-wrapper ${todoData.completed && "completed"}`}>
       {todoData.completed ? (
         <Checkmark onClick={() => toggleTodo(todoData)} />
       ) : (

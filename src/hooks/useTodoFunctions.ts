@@ -8,8 +8,8 @@ export const useTodoFunctions = (): UseTodoFunctions => {
   const getTodos = async () => {
     await fetch("http://127.0.0.1:5000/todos")
       .then((res) => res.json())
-      .then(({ results }) => {
-        setTodos(results);
+      .then((data) => {
+        setTodos(data.results);
       })
       .catch((err) => console.error("Error getting todos: ", err));
   };
@@ -18,7 +18,7 @@ export const useTodoFunctions = (): UseTodoFunctions => {
     const newId = v4();
 
     const newTodo: Todo = {
-      id: newId,
+      todo_id: newId,
       task,
       completed: false,
     };
@@ -36,14 +36,14 @@ export const useTodoFunctions = (): UseTodoFunctions => {
 
   const toggleTodo = async (todo: Todo) => {
     const completedTodo = todos.map((todoItem) =>
-      todoItem.id === todo.id
+      todoItem.todo_id === todo.todo_id
         ? { ...todoItem, completed: !todoItem.completed }
         : todoItem
     );
 
     const updateTodo = todos.indexOf(todo);
 
-    await fetch(`http://127.0.0.1:5000/todo/${todo.id}`, {
+    await fetch(`http://127.0.0.1:5000/todo/${todo.todo_id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(completedTodo[updateTodo]),
@@ -55,12 +55,13 @@ export const useTodoFunctions = (): UseTodoFunctions => {
   };
 
   const deleteTodo = async (todo: Todo) => {
-    console.log(todo);
-    await fetch(`http://127.0.0.1:5000/todo/${todo.id}`, {
+    await fetch(`http://127.0.0.1:5000/todo/${todo.todo_id}`, {
       method: "DELETE",
     }).catch((err) => console.error("Error deleting todo: ", err));
 
-    setTodos((prev) => prev.filter((todoItem) => todoItem.id !== todo.id));
+    setTodos((prev) =>
+      prev.filter((todoItem) => todoItem.todo_id !== todo.todo_id)
+    );
   };
 
   return { todos, getTodos, addTodo, toggleTodo, deleteTodo };

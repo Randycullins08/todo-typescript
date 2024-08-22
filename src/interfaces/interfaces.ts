@@ -1,7 +1,7 @@
 import { FormEvent, ReactNode } from "react";
 
 export interface Todo {
-  id: string;
+  todo_id: string;
   task: string;
   completed: boolean;
 }

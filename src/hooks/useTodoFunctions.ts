@@ -1,68 +1,79 @@
-import { useState } from "react";
-import { Todo, UseTodoFunctions } from "../interfaces/interfaces";
+import { useCallback, useState } from "react";
 import { v4 } from "uuid";
+import { Todo, TodoResponse, UseTodoFunctions } from "../interfaces/interfaces";
+import { useApi } from "./useApi";
 
 export const useTodoFunctions = (): UseTodoFunctions => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const { fetchData } = useApi<TodoResponse>();
 
-  const getTodos = async () => {
-    await fetch("http://127.0.0.1:5000/todos")
-      .then((res) => res.json())
-      .then((data) => {
-        setTodos(data.results);
-      })
-      .catch((err) => console.error("Error getting todos: ", err));
-  };
+  const getTodos = useCallback(async () => {
+    try {
+      const result = await fetchData("/todos");
+      if (result && Array.isArray(result.results)) {
+        setTodos(result.results);
+      } else {
+        console.error("Unexpected data format:", result);
+      }
+    } catch (error) {
+      console.error("Error getting todos: ", error);
+    }
+  }, [fetchData]);
 
-  const addTodo = async (task: string) => {
-    const newId = v4();
+  const addTodo = useCallback(
+    async (task: string) => {
+      const newId = v4();
+      const newTodo = { todo_id: newId, task, completed: false };
 
-    const newTodo: Todo = {
-      todo_id: newId,
-      task,
-      completed: false,
-    };
+      try {
+        await fetchData("/todos", {
+          method: "POST",
+          body: newTodo,
+        });
+        setTodos((prev) => [...prev, newTodo]);
+      } catch (error) {
+        console.error("Error adding todo: ", error);
+      }
+    },
+    [fetchData]
+  );
 
-    await fetch("http://127.0.0.1:5000/todos", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newTodo),
-    })
-      .then((res) => res.json())
-      .catch((err) => console.error("Error submitting todo: ", err));
+  const toggleTodo = useCallback(
+    async (todo: Todo) => {
+      const updatedTodo = { ...todo, completed: !todo.completed };
 
-    setTodos((prev) => [...prev, newTodo]);
-  };
+      try {
+        await fetchData(`/todo/${todo.todo_id}`, {
+          method: "PUT",
+          body: updatedTodo,
+        });
+        setTodos((prev) =>
+          prev.map((todoItem) =>
+            todoItem.todo_id === todo.todo_id ? updatedTodo : todoItem
+          )
+        );
+      } catch (error) {
+        console.error("Error updating todo: ", error);
+      }
+    },
+    [fetchData, todos]
+  );
 
-  const toggleTodo = async (todo: Todo) => {
-    const completedTodo = todos.map((todoItem) =>
-      todoItem.todo_id === todo.todo_id
-        ? { ...todoItem, completed: !todoItem.completed }
-        : todoItem
-    );
-
-    const updateTodo = todos.indexOf(todo);
-
-    await fetch(`http://127.0.0.1:5000/todo/${todo.todo_id}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(completedTodo[updateTodo]),
-    })
-      .then((res) => res.json())
-      .catch((err) => console.error("Error Completing Task: ", err));
-
-    setTodos(completedTodo);
-  };
-
-  const deleteTodo = async (todo: Todo) => {
-    await fetch(`http://127.0.0.1:5000/todo/${todo.todo_id}`, {
-      method: "DELETE",
-    }).catch((err) => console.error("Error deleting todo: ", err));
-
-    setTodos((prev) =>
-      prev.filter((todoItem) => todoItem.todo_id !== todo.todo_id)
-    );
-  };
+  const deleteTodo = useCallback(
+    async (todo: Todo) => {
+      try {
+        await fetchData(`/todo/${todo.todo_id}`, {
+          method: "DELETE",
+        });
+        setTodos((prev) =>
+          prev.filter((todoItem) => todoItem.todo_id !== todo.todo_id)
+        );
+      } catch (error) {
+        console.error("Error deleting todo: ", error);
+      }
+    },
+    [fetchData]
+  );
 
   return { todos, getTodos, addTodo, toggleTodo, deleteTodo };
 };

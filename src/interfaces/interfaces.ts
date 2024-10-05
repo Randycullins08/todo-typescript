@@ -25,3 +25,20 @@ export interface FormProps {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   children: ReactNode;
 }
+
+export interface ApiOptions {
+  method?: string;
+  body?: any;
+}
+
+export interface ApiResponse<T> {
+  data: T | null;
+  error: string | null;
+  loading: boolean;
+  fetchData: (url: string, options?: ApiOptions) => Promise<T | null>;
+}
+
+export interface TodoResponse {
+  message: string;
+  results: Todo[];
+}

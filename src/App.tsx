@@ -6,13 +6,13 @@ export default function App() {
   const { todos } = useTodoContext();
 
   return (
-    <div className="app">
-      <h1>Todo App</h1>
+    <div className="app bg-background min-h-screen p-6">
+      <h1 className="text-3xl font-bold text-dark mb-4">Todo App</h1>
 
       <TodoForm />
 
       {todos && (
-        <ul>
+        <ul className="mt-4 space-y-2">
           {todos.map((todo) => (
             <TodoItem key={todo.todo_id} todoData={todo} />
           ))}

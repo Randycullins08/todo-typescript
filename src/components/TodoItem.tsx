@@ -11,7 +11,7 @@ export default function TodoItem({ todoData }: TodoProps) {
     <li
       className={`flex items-center justify-between p-3 rounded-lg shadow-sm transition-all ${
         todoData.completed
-          ? "bg-green-100 text-gray-500 line-through"
+          ? "bg-cyan-100 text-gray-500 line-through"
           : "bg-white text-dark"
       } hover:bg-gray-100`}
     >

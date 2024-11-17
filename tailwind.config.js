@@ -4,12 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#4CAF50", // Green
-        secondary: "#FF9800", // Orange
-        background: "#F9F9F9", // Light Gray
-        accent: "#00BCD4", // Cyan
-        dark: "#374151", // Dark Gray
-        light: "#FFFFFF", // White
+        primary: "#00BCD4",
+        secondary: "#FF9800",
+        background: "#F9F9F9",
+        accent: "#374151",
+        dark: "#374151",
+        light: "#FFFFFF",
       },
     },
   },

@@ -5,13 +5,24 @@ import { useApi } from "./useApi";
 
 export const useTodoFunctions = (): UseTodoFunctions => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [active, setActive] = useState<Boolean>(false);
+  const [activeArr, setActiveArr] = useState<Todo[]>([]);
   const { fetchData } = useApi<TodoResponse>();
 
   const getTodos = useCallback(async () => {
     try {
       const result = await fetchData("/todos");
       if (result && Array.isArray(result.results)) {
+        console.log(result.results);
         setTodos(result.results);
+
+        todos.forEach((todo) => {
+          if (todo.completed) {
+            setActiveArr((prev) => [...prev, todo]);
+          }
+        });
+
+        console.log("active array", activeArr);
       } else {
         console.error("Unexpected data format:", result);
       }

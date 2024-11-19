@@ -3,7 +3,10 @@ import TodoItem from "./components/TodoItem";
 import { useTodoContext } from "./components/context/TodoContext";
 
 export default function App() {
-  const { todos } = useTodoContext();
+  const { todos, activeArr, completedArr } = useTodoContext();
+
+  console.log("active", activeArr);
+  console.log("completed", completedArr);
 
   return (
     <div className="app bg-background min-h-screen p-6">

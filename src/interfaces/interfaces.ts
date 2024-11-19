@@ -16,6 +16,8 @@ export interface UseTodoFunctions {
 
 export interface TodoContextProps {
   todos: Todo[];
+  activeArr: Todo[];
+  completedArr: Todo[];
   addTodo: (task: string) => Promise<void>;
   toggleTodo: (todo: Todo) => Promise<void>;
   deleteTodo: (todo: Todo) => Promise<void>;

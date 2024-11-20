@@ -1,6 +1,8 @@
-import React from "react";
+import { useTodoContext } from "../context/TodoContext";
 
 const Navbar: React.FC = () => {
+  const { filter, setFilter } = useTodoContext();
+
   return (
     <nav className="bg-primary text-light shadow-md">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
@@ -10,22 +12,37 @@ const Navbar: React.FC = () => {
           </a>
         </div>
 
-        {/* Filters or Actions */}
         <ul className="flex space-x-6 text-sm font-medium">
           <li>
-            <a href="#" className="hover:text-accent">
+            <button
+              className={`hover:text-accent ${
+                filter === "all" && "text-accent font-bold"
+              }`}
+              onClick={() => setFilter("all")}
+            >
               All
-            </a>
+            </button>
           </li>
+
           <li>
-            <a href="#" className="hover:text-accent">
+            <button
+              className={`hover:text-accent ${
+                filter === "active" && "text-accent font-bold"
+              }`}
+              onClick={() => setFilter("active")}
+            >
               Active
-            </a>
+            </button>
           </li>
           <li>
-            <a href="#" className="hover:text-accent">
+            <button
+              className={`hover:text-accent ${
+                filter === "completed" && "text-accent font-bold"
+              }`}
+              onClick={() => setFilter("completed")}
+            >
               Completed
-            </a>
+            </button>
           </li>
         </ul>
       </div>

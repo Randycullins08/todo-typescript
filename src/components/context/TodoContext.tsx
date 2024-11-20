@@ -6,34 +6,32 @@ import {
   useEffect,
   useState,
 } from "react";
+
 import { Todo, TodoContextProps } from "../../interfaces/interfaces";
 import { useTodoFunctions } from "../../hooks/useTodoFunctions";
+import { FilterType } from "../../types/types";
 
 const TodoContext = createContext<TodoContextProps | undefined>(undefined);
 
 export const TodoProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [activeArr, setActiveArr] = useState<Todo[]>([]);
-  const [completedArr, setCompletedArr] = useState<Todo[]>([]);
+  const [filter, setFilter] = useState<FilterType>("all");
 
   const { todos, getTodos, addTodo, toggleTodo, deleteTodo } =
     useTodoFunctions();
 
   useEffect(() => {
     getTodos();
-
-    todos.forEach((todo) => {
-      if (!todo.completed) {
-        setActiveArr((prev) => [...prev, todo]);
-      }
-
-      setCompletedArr((prev) => [...prev, todo]);
-    });
   }, []);
+
+  const activeArr: Todo[] = todos.filter((todo) => !todo.completed);
+  const completedArr: Todo[] = todos.filter((todo) => todo.completed);
 
   const contextValues: TodoContextProps = {
     todos,
     activeArr,
     completedArr,
+    filter,
+    setFilter,
     addTodo,
     toggleTodo,
     deleteTodo,

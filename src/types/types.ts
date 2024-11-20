@@ -12,3 +12,5 @@ export type ToggleProps = {
 export type TodoProps = {
   todoData: Todo;
 };
+
+export type FilterType = "all" | "active" | "completed";

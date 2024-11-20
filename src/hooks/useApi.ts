@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+
 import { ApiOptions, ApiResponse } from "../interfaces/interfaces";
 
 export const useApi = <T>(): ApiResponse<T> => {
@@ -28,7 +29,6 @@ export const useApi = <T>(): ApiResponse<T> => {
 
       try {
         const response = await fetch(`${BASE_URL}${endpoint}`, fetchOptions);
-        if (!response.ok) throw new Error("Failed to fetch data");
         const result = await response.json();
 
         setData(result);

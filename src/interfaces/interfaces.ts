@@ -1,4 +1,6 @@
-import { FormEvent, ReactNode } from "react";
+import { Dispatch, FormEvent, ReactNode, SetStateAction } from "react";
+
+import { FilterType } from "../types/types";
 
 export interface Todo {
   todo_id: string;
@@ -18,6 +20,8 @@ export interface TodoContextProps {
   todos: Todo[];
   activeArr: Todo[];
   completedArr: Todo[];
+  filter: FilterType;
+  setFilter: Dispatch<SetStateAction<FilterType>>;
   addTodo: (task: string) => Promise<void>;
   toggleTodo: (todo: Todo) => Promise<void>;
   deleteTodo: (todo: Todo) => Promise<void>;

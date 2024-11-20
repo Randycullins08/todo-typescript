@@ -3,10 +3,10 @@ import TodoItem from "./components/TodoItem";
 import { useTodoContext } from "./components/context/TodoContext";
 
 export default function App() {
-  const { todos, activeArr, completedArr } = useTodoContext();
+  const { todos, activeArr, completedArr, filter } = useTodoContext();
 
-  console.log("active", activeArr);
-  console.log("completed", completedArr);
+  const filteredTodos =
+    filter === "all" ? todos : filter === "active" ? activeArr : completedArr;
 
   return (
     <div className="app bg-background min-h-screen p-6">
@@ -14,9 +14,9 @@ export default function App() {
 
       <TodoForm />
 
-      {todos && (
+      {filteredTodos && (
         <ul className="mt-4 space-y-2">
-          {todos.map((todo) => (
+          {filteredTodos.map((todo) => (
             <TodoItem key={todo.todo_id} todoData={todo} />
           ))}
         </ul>

@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
 import { v4 } from "uuid";
+
 import { Todo, TodoResponse, UseTodoFunctions } from "../interfaces/interfaces";
 import { useApi } from "./useApi";
 
 export const useTodoFunctions = (): UseTodoFunctions => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [activeArr, setActiveArr] = useState<Todo[]>([]);
   const { fetchData } = useApi<TodoResponse>();
 
   const getTodos = useCallback(async () => {

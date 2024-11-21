@@ -15,7 +15,7 @@ export default function App() {
       <TodoForm />
 
       {filteredTodos && (
-        <ul className="mt-4 space-y-2">
+        <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredTodos.map((todo) => (
             <TodoItem key={todo.todo_id} todoData={todo} />
           ))}

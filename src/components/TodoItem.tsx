@@ -1,8 +1,8 @@
-import { TodoProps } from "../types/types";
-import { useTodoContext } from "./context/TodoContext";
-import Checkbox from "./icons/Checkbox";
-import Checkmark from "./icons/Checkmark";
 import TrashCanIcon from "./icons/TrashCanIcon";
+import Checkmark from "./icons/Checkmark";
+import Checkbox from "./icons/Checkbox";
+import { useTodoContext } from "./context/TodoContext";
+import { TodoProps } from "../types/types";
 
 export default function TodoItem({ todoData }: TodoProps) {
   const { toggleTodo, deleteTodo } = useTodoContext();

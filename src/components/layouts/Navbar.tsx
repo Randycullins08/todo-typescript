@@ -34,6 +34,7 @@ const Navbar: React.FC = () => {
               Active
             </button>
           </li>
+
           <li>
             <button
               className={`hover:text-accent ${

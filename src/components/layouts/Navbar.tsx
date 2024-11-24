@@ -7,16 +7,14 @@ const Navbar: React.FC = () => {
     <nav className="bg-primary dark:bg-dark text-light dark:text-light shadow-md">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         <div className="text-2xl font-bold">
-          <a href="#" className="hover:text-accent">
-            TodoApp
-          </a>
+          <h1>TodoApp</h1>
         </div>
 
         <ul className="flex space-x-6 text-sm font-medium">
           <li>
             <button
-              className={`hover:text-accent ${
-                filter === "all" && "text-accent font-bold"
+              className={`hover:text-accent dark:hover:text-primary ${
+                filter === "all" && "text-accent dark:text-primary font-bold"
               }`}
               onClick={() => setFilter("all")}
             >
@@ -26,8 +24,8 @@ const Navbar: React.FC = () => {
 
           <li>
             <button
-              className={`hover:text-accent ${
-                filter === "active" && "text-accent font-bold"
+              className={`hover:text-accent dark:hover:text-primary ${
+                filter === "active" && "text-accent dark:text-primary font-bold"
               }`}
               onClick={() => setFilter("active")}
             >
@@ -37,8 +35,9 @@ const Navbar: React.FC = () => {
 
           <li>
             <button
-              className={`hover:text-accent ${
-                filter === "completed" && "text-accent font-bold"
+              className={`hover:text-accent dark:hover:text-primary ${
+                filter === "completed" &&
+                "text-accent dark:text-primary font-bold"
               }`}
               onClick={() => setFilter("completed")}
             >
@@ -49,7 +48,7 @@ const Navbar: React.FC = () => {
 
         <button
           onClick={toggleTheme}
-          className="p-2 rounded border hover:text-accent"
+          className="p-2 rounded border font-bold hover:text-accent dark:hover:text-primary dark:text-light"
         >
           {theme === "light" ? "Dark Mode" : "Light Mode"}
         </button>

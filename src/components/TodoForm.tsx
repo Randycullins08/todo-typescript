@@ -34,7 +34,7 @@ export default function TodoForm() {
       />
       <button
         type="submit"
-        className="px-4 py-2 bg-primary text-light font-medium rounded-lg shadow-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent"
+        className="px-4 py-2 bg-primary dark:bg-dark dark:text-light text-light font-medium rounded-lg shadow-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent"
       >
         Save Todo
       </button>

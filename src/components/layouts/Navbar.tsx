@@ -1,10 +1,10 @@
 import { useTodoContext } from "../context/TodoContext";
 
 const Navbar: React.FC = () => {
-  const { filter, setFilter } = useTodoContext();
+  const { filter, setFilter, theme, toggleTheme } = useTodoContext();
 
   return (
-    <nav className="bg-primary text-light shadow-md">
+    <nav className="bg-primary dark:bg-dark text-light dark:text-light shadow-md">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         <div className="text-2xl font-bold">
           <a href="#" className="hover:text-accent">
@@ -46,6 +46,13 @@ const Navbar: React.FC = () => {
             </button>
           </li>
         </ul>
+
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded border hover:text-accent"
+        >
+          {theme === "light" ? "Dark Mode" : "Light Mode"}
+        </button>
       </div>
     </nav>
   );

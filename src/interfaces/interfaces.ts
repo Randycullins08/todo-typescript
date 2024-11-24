@@ -25,6 +25,8 @@ export interface TodoContextProps {
   addTodo: (task: string) => Promise<void>;
   toggleTodo: (todo: Todo) => Promise<void>;
   deleteTodo: (todo: Todo) => Promise<void>;
+  theme: "light" | "dark";
+  toggleTheme: () => void;
 }
 
 export interface FormProps {

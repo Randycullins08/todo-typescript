@@ -15,13 +15,23 @@ const TodoContext = createContext<TodoContextProps | undefined>(undefined);
 
 export const TodoProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [filter, setFilter] = useState<FilterType>("all");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const { todos, getTodos, addTodo, toggleTodo, deleteTodo } =
     useTodoFunctions();
 
+  const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+
   useEffect(() => {
     getTodos();
+    if (savedTheme) setTheme(savedTheme);
   }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
 
   const activeArr: Todo[] = todos.filter((todo) => !todo.completed);
   const completedArr: Todo[] = todos.filter((todo) => todo.completed);
@@ -35,6 +45,8 @@ export const TodoProvider: FC<{ children: ReactNode }> = ({ children }) => {
     addTodo,
     toggleTodo,
     deleteTodo,
+    theme,
+    toggleTheme,
   };
 
   return (

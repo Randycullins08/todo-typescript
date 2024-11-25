@@ -11,6 +11,7 @@ export default function TrashCanIcon({ onClick, ...props }: IconProps) {
         stroke="currentColor"
         aria-hidden="true"
         width="20"
+        className="transition-transform transform hover:scale-125"
         {...props}
       >
         <path

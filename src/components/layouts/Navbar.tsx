@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
         </div>
 
         <ul className="flex space-x-6 text-sm font-medium">
-          <li>
+          <li className="transition-transform transform hover:scale-110">
             <button
               className={`hover:text-accent dark:hover:text-primary ${
                 filter === "all" && "text-accent dark:text-primary font-bold"
@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
             </button>
           </li>
 
-          <li>
+          <li className="transition-transform transform hover:scale-110">
             <button
               className={`hover:text-accent dark:hover:text-primary ${
                 filter === "active" && "text-accent dark:text-primary font-bold"
@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
             </button>
           </li>
 
-          <li>
+          <li className="transition-transform transform hover:scale-110">
             <button
               className={`hover:text-accent dark:hover:text-primary ${
                 filter === "completed" &&
@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
 
         <button
           onClick={toggleTheme}
-          className="p-2 rounded border font-bold hover:text-accent dark:hover:text-primary dark:text-light"
+          className="p-2 rounded border font-bold hover:text-accent dark:hover:text-primary dark:text-light transition-transform transform hover:scale-110"
         >
           {theme === "light" ? "Dark Mode" : "Light Mode"}
         </button>

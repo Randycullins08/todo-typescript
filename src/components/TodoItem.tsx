@@ -1,6 +1,7 @@
 import TrashCanIcon from "./icons/TrashCanIcon";
 import Checkmark from "./icons/Checkmark";
 import Checkbox from "./icons/Checkbox";
+
 import { useTodoContext } from "./context/TodoContext";
 import { TodoProps } from "../types/types";
 
@@ -9,17 +10,14 @@ export default function TodoItem({ todoData }: TodoProps) {
 
   return (
     <li
-      className={`flex items-center justify-between p-3 rounded-lg shadow-sm transition-all ${
+      onClick={() => toggleTodo(todoData)}
+      className={`flex items-center justify-between p-3 rounded-lg shadow-sm transition-all cursor-pointer ${
         todoData.completed
           ? "bg-cyan-100 dark:bg-dark dark:text-light text-gray-500 line-through"
           : "bg-white text-dark"
       } hover:bg-gray-100`}
     >
-      <span
-        className="cursor-pointer"
-        onClick={() => toggleTodo(todoData)}
-        aria-label="Toggle complete"
-      >
+      <span aria-label="Toggle complete">
         {todoData.completed ? <Checkmark /> : <Checkbox />}
       </span>
 

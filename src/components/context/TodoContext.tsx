@@ -51,7 +51,7 @@ export const TodoProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   return (
     <TodoContext.Provider value={contextValues}>
-      <div className={`${theme === "dark" ? "dark" : ""}`}>{children}</div>
+      <div className={`${theme === "dark" && "dark"}`}>{children}</div>
     </TodoContext.Provider>
   );
 };

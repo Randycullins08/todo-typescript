@@ -4,7 +4,7 @@ const Navbar: React.FC = () => {
   const { filter, setFilter, theme, toggleTheme } = useTodoContext();
 
   return (
-    <nav className="bg-primary dark:bg-dark text-light dark:text-light shadow-md">
+    <nav className="bg-primary text-light dark:bg-dark dark:text-light shadow-md">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         <div className="text-2xl font-bold">
           <h1>TodoApp</h1>

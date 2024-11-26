@@ -6,9 +6,11 @@ import { useApi } from "./useApi";
 
 export const useTodoFunctions = (): UseTodoFunctions => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const { fetchData } = useApi<TodoResponse>();
+  const { fetchData, setLoading } = useApi<TodoResponse>();
 
   const getTodos = useCallback(async () => {
+    setLoading(true);
+
     try {
       const result = await fetchData("/todos");
       if (result && Array.isArray(result.results)) {
@@ -18,11 +20,15 @@ export const useTodoFunctions = (): UseTodoFunctions => {
       }
     } catch (error) {
       console.error("Error getting todos: ", error);
+    } finally {
+      setLoading(false);
     }
   }, [fetchData]);
 
   const addTodo = useCallback(
     async (task: string) => {
+      setLoading(true);
+
       const newId = v4();
       const newTodo = { todo_id: newId, task, completed: false };
 
@@ -34,6 +40,8 @@ export const useTodoFunctions = (): UseTodoFunctions => {
         setTodos((prev) => [...prev, newTodo]);
       } catch (error) {
         console.error("Error adding todo: ", error);
+      } finally {
+        setLoading(false);
       }
     },
     [fetchData]
@@ -41,6 +49,8 @@ export const useTodoFunctions = (): UseTodoFunctions => {
 
   const toggleTodo = useCallback(
     async (todo: Todo) => {
+      setLoading(true);
+
       const updatedTodo = { ...todo, completed: !todo.completed };
 
       try {
@@ -55,6 +65,8 @@ export const useTodoFunctions = (): UseTodoFunctions => {
         );
       } catch (error) {
         console.error("Error updating todo: ", error);
+      } finally {
+        setLoading(false);
       }
     },
     [fetchData, todos]
@@ -62,6 +74,8 @@ export const useTodoFunctions = (): UseTodoFunctions => {
 
   const deleteTodo = useCallback(
     async (todo: Todo) => {
+      setLoading(true);
+
       try {
         await fetchData(`/todo/${todo.todo_id}`, {
           method: "DELETE",
@@ -71,6 +85,8 @@ export const useTodoFunctions = (): UseTodoFunctions => {
         );
       } catch (error) {
         console.error("Error deleting todo: ", error);
+      } finally {
+        setLoading(false);
       }
     },
     [fetchData]

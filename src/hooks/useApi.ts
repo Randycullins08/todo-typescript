@@ -44,5 +44,5 @@ export const useApi = <T>(): ApiResponse<T> => {
     []
   );
 
-  return { data, error, loading, fetchData };
+  return { data, error, loading, setLoading, fetchData };
 };

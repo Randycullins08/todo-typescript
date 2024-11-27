@@ -6,7 +6,7 @@ import { useApi } from "./useApi";
 
 export const useTodoFunctions = (): UseTodoFunctions => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const { fetchData, setLoading } = useApi<TodoResponse>();
+  const { fetchData, loading, setLoading } = useApi<TodoResponse>();
 
   const getTodos = useCallback(async () => {
     setLoading(true);
@@ -92,5 +92,5 @@ export const useTodoFunctions = (): UseTodoFunctions => {
     [fetchData]
   );
 
-  return { todos, getTodos, addTodo, toggleTodo, deleteTodo };
+  return { todos, getTodos, addTodo, toggleTodo, deleteTodo, loading };
 };

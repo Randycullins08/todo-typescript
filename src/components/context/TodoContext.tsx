@@ -17,7 +17,7 @@ export const TodoProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [filter, setFilter] = useState<FilterType>("all");
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
-  const { todos, getTodos, addTodo, toggleTodo, deleteTodo } =
+  const { todos, getTodos, addTodo, toggleTodo, deleteTodo, loading } =
     useTodoFunctions();
 
   const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
@@ -47,6 +47,7 @@ export const TodoProvider: FC<{ children: ReactNode }> = ({ children }) => {
     deleteTodo,
     theme,
     toggleTheme,
+    loading,
   };
 
   return (

@@ -14,6 +14,7 @@ export interface UseTodoFunctions {
   addTodo: (task: string) => Promise<void>;
   toggleTodo: (todo: Todo) => Promise<void>;
   deleteTodo: (todo: Todo) => Promise<void>;
+  loading: boolean;
 }
 
 export interface TodoContextProps {
@@ -27,6 +28,7 @@ export interface TodoContextProps {
   deleteTodo: (todo: Todo) => Promise<void>;
   theme: "light" | "dark";
   toggleTheme: () => void;
+  loading: boolean;
 }
 
 export interface FormProps {

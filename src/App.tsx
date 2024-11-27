@@ -1,10 +1,11 @@
+import LoadingIcon from "./components/icons/LoadingIcon";
 import TodoForm from "./components/TodoForm";
 import TodoItem from "./components/TodoItem";
 
 import { useTodoContext } from "./components/context/TodoContext";
 
 export default function App() {
-  const { todos, activeArr, completedArr, filter } = useTodoContext();
+  const { todos, activeArr, completedArr, filter, loading } = useTodoContext();
 
   const filteredTodos =
     filter === "all" ? todos : filter === "active" ? activeArr : completedArr;
@@ -14,6 +15,12 @@ export default function App() {
       <h1 className="text-3xl font-bold text-dark mb-4">Todo App</h1>
 
       <TodoForm />
+
+      {loading && (
+        <div className="flex justify-center mt-4">
+          <LoadingIcon />
+        </div>
+      )}
 
       {filteredTodos && (
         <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

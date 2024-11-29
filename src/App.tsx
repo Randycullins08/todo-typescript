@@ -1,3 +1,10 @@
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove,
+} from "@dnd-kit/sortable";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+
 import LoadingIcon from "./components/icons/LoadingIcon";
 import TodoForm from "./components/TodoForm";
 import TodoItem from "./components/TodoItem";
@@ -5,10 +12,27 @@ import TodoItem from "./components/TodoItem";
 import { useTodoContext } from "./components/context/TodoContext";
 
 export default function App() {
-  const { todos, activeArr, completedArr, filter, loading } = useTodoContext();
+  const { todos, activeArr, completedArr, filter, loading, saveNewOrder } =
+    useTodoContext();
 
   const filteredTodos =
     filter === "all" ? todos : filter === "active" ? activeArr : completedArr;
+
+  const handleDragEnd = (event: any) => {
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      const oldIndex = filteredTodos.findIndex(
+        (todo) => todo.todo_id === active.id
+      );
+      const newIndex = filteredTodos.findIndex(
+        (todo) => todo.todo_id === over.id
+      );
+
+      const updatedTodos = arrayMove(filteredTodos, oldIndex, newIndex);
+      saveNewOrder(updatedTodos);
+    }
+  };
 
   return (
     <div className="app bg-background min-h-screen p-6">

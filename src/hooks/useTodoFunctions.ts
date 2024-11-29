@@ -92,5 +92,32 @@ export const useTodoFunctions = (): UseTodoFunctions => {
     [fetchData]
   );
 
-  return { todos, getTodos, addTodo, toggleTodo, deleteTodo, loading };
+  const saveNewOrder = useCallback(
+    async (newOrder: Todo[]) => {
+      setLoading(true);
+
+      try {
+        await fetchData("/todos/order", {
+          method: "POST",
+          body: { newOrder },
+        });
+        setTodos(newOrder);
+      } catch (error) {
+        console.error("Error saving new error", error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [fetchData]
+  );
+
+  return {
+    todos,
+    getTodos,
+    addTodo,
+    toggleTodo,
+    deleteTodo,
+    saveNewOrder,
+    loading,
+  };
 };

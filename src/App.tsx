@@ -47,11 +47,21 @@ export default function App() {
       )}
 
       {filteredTodos && (
-        <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {filteredTodos.map((todo) => (
-            <TodoItem key={todo.todo_id} todoData={todo} />
-          ))}
-        </ul>
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext
+            items={filteredTodos}
+            strategy={verticalListSortingStrategy}
+          >
+            <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {filteredTodos.map((todo) => (
+                <TodoItem key={todo.todo_id} todoData={todo} />
+              ))}
+            </ul>
+          </SortableContext>
+        </DndContext>
       )}
     </div>
   );

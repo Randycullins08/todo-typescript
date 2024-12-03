@@ -22,14 +22,10 @@ export default function App() {
     const { active, over } = event;
 
     if (active.id !== over.id) {
-      const oldIndex = filteredTodos.findIndex(
-        (todo) => todo.todo_id === active.id
-      );
-      const newIndex = filteredTodos.findIndex(
-        (todo) => todo.todo_id === over.id
-      );
+      const oldIndex = todos.findIndex((todo) => todo.todo_id === active.id);
+      const newIndex = todos.findIndex((todo) => todo.todo_id === over.id);
 
-      const updatedTodos = arrayMove(filteredTodos, oldIndex, newIndex);
+      const updatedTodos = arrayMove(todos, oldIndex, newIndex);
       saveNewOrder(updatedTodos);
     }
   };
@@ -52,7 +48,7 @@ export default function App() {
           onDragEnd={handleDragEnd}
         >
           <SortableContext
-            items={filteredTodos}
+            items={filteredTodos.map((todo) => todo.todo_id)}
             strategy={verticalListSortingStrategy}
           >
             <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

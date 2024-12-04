@@ -30,7 +30,6 @@ export interface TodoContextProps {
   theme: "light" | "dark";
   toggleTheme: () => void;
   loading: boolean;
-  saveNewOrder: (newOrder: Todo[]) => Promise<void>;
 }
 
 export interface FormProps {
